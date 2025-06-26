@@ -35,23 +35,23 @@ const CompanionList = ({ title, companion, classNames }: CompanionsListProps) =>
                 </TableHeader>
                 <TableBody>
                     {companion?.map(({ id, subject, duration, name, topic }) => (
-                        <TableRow>
-                            <TableCell>
+                        <TableRow className='hover:shadow-md shadow-gray-500 transition-all duration-300 ease-in-out'>
+                            <TableCell >
                                 <Link href={`/companions/${id}`}>
                                     <div className='flex items-center gap-2'>
-                                        <div className='size-[72px flex items-center justify-center rounded-lg max-md:hidden' >
+                                        <div className='size-[72px flex items-center justify-center h-10 w-10 bg-[#58A6FF] hover:bg-[#1F6FEB] rounded-lg max-md:hidden' >
 
                                             <Image
                                                 src={`/icons/${subject}.svg`}
                                                 alt={name}
-                                                width={35}
-                                                height={35}
+                                                width={30}
+                                                height={30}
                                                 className='rounded-full'
                                             />
 
                                         </div>
                                         <div className='flex flex-col gap-2'>
-                                            <p className='text-xl font-bold'>
+                                            <p className='text-lg font-bold'>
                                                 {topic}
                                             </p>
                                             <p className='text-sm text-[#8B949E]'>
@@ -63,10 +63,10 @@ const CompanionList = ({ title, companion, classNames }: CompanionsListProps) =>
                                 </Link>
                             </TableCell>
                             <TableCell>
-                                <div className='subject-badge bg-cyan-500 rounded-lg p-2 text-gray-800 text-sm text-semibold w-fit max-md:hidden'>
+                                <div className='subject-badge bg-[#58A6FF] hover:bg-[#1F6FEB] rounded-lg p-2 text-gray-800 text-sm text-semibold w-fit max-md:hidden'>
                                     {subject}
                                 </div>
-                                <div className='flex items-center justify-center bg-cyan-500 md:hidden rounded-lg w-fit p-2'>
+                                <div className='flex items-center justify-center bg-[#58A6FF] hover:bg-[#1F6FEB] md:hidden rounded-lg w-fit p-2'>
                                     <Image
                                         src={`/icons/${subject}.svg`}
                                         alt={subject}
@@ -76,7 +76,7 @@ const CompanionList = ({ title, companion, classNames }: CompanionsListProps) =>
                                 </div>
                             </TableCell>
                             <TableCell>
-                                <div className='flex justify-end text-xl items-center gap-2 w-full'>
+                                <div className='flex justify-end text-lg items-center gap-2 w-full'>
                                     <p>{duration}{' '}
                                         <span className='max-md:hidden'>mins</span>
                                     </p>
