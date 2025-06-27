@@ -17,9 +17,7 @@ const CTA = () => {
             >
 
             </Image>
-            <button className='flex gap-3 bg-[#58A6FF] hover:bg-[#1F6FEB] text-[#ffffff]
-
- w-full h-10 rounded-xl items-center justify-center hover transition-all duration-300 font-bold'>
+            <button className='flex gap-3 bg-[#58A6FF] hover:bg-[#1F6FEB] text-black w-full h-10 rounded-xl items-center justify-center hover transition-all duration-300 font-bold'>
                 <Image
                     src='/icons/plus.svg'
                     alt="plus"
