@@ -33,8 +33,8 @@ const CompanionCard = ({ id, name, topic, duration, color, subject }: CompanionC
 
                 <Image src="/icons/clock.svg"
                     alt='duration'
-                    width={13}
-                    height={13}
+                    width={15}
+                    height={15}
                 />
                 <p className='text-sm'>{duration} </p>
             </div>

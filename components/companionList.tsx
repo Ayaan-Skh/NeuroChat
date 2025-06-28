@@ -35,7 +35,7 @@ const CompanionList = ({ title, companion, classNames }: CompanionsListProps) =>
                 </TableHeader>
                 <TableBody>
                     {companion?.map(({ id, subject, duration, name, topic }) => (
-                        <TableRow className='hover:shadow-md shadow-gray-500 transition-all duration-300 ease-in-out'>
+                        <TableRow key={id} className='hover:shadow-md shadow-gray-500 transition-all duration-300 ease-in-out'>
                             <TableCell >
                                 <Link href={`/companions/${id}`}>
                                     <div className='flex items-center gap-2'>
