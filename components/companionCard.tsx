@@ -36,7 +36,7 @@ const CompanionCard = ({ id, name, topic, duration, color, subject }: CompanionC
                     width={15}
                     height={15}
                 />
-                <p className='text-sm'>{duration} </p>
+                <p className='text-sm'>{duration} minutes </p>
             </div>
             <Link href={`/companions/${id}`} className='text-black font-bold text-md '>
                 <Button className='bg-[#58A6FF] hover:bg-[#1F6FEB] transition-all ease-in-out duration-200 w-full h-10 rounded-lg '>Launch lesson</Button>

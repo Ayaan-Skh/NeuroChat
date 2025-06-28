@@ -14,7 +14,7 @@ export const createCompanion = async (formData: CreateCompanion) => {
 }
 // Consider this as blackbox for now 
 // This part is used to get all the companions on companion page 
-
+//It also has the main logic for search filter and search text feature
 export const getAllCompanions = async ({ limit = 10, page = 1, subject, topic }: GetAllCompanions) => {
     const supabase = createSupabaseClient();
 
@@ -36,4 +36,17 @@ export const getAllCompanions = async ({ limit = 10, page = 1, subject, topic }:
     if (error) throw new Error(error.message);
 
     return companions;
+}
+
+// Gives single companion
+export const getCompanion = async (id: string) => {
+    const supabase = createSupabaseClient()
+    const { data, error } = await supabase
+        .from('companions')
+        .select()
+        .eq('id', id)
+
+    if (error) return console.log(error)
+
+    return data[0]
 }
