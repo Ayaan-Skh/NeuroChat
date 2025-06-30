@@ -1,3 +1,4 @@
+import CompanionComponent from '@/components/CompanionComponent'
 import { getCompanion } from '@/lib/actions/companion.action'
 import { currentUser } from '@clerk/nextjs/server'
 import Image from 'next/image'
@@ -22,7 +23,7 @@ const CompanionSessions = async ({ params }: CompanionSessionPageProps) => {
     redirect('/companions')
   }
   return (
-    <main className='mx-auto px-14 flex flex-col gap-8  h-full max-w-[1400px] pt-10 max-sm:px-2 shadow-sm hover:shadow-slate-400 transition-all ease-in-out duration-300'>
+    <main className='mx-auto px-14 flex flex-col gap-8  h-full max-w-[1400px] pt-10 max-sm:px-2 '>
       <article className='flex justify-between rounded-border shadow-sm hover:shadow-slate-400  rounded-lg bg-[#161B22] hover:shadow-sm min-h-26 max-h-96 gap-6 max-md:flex-col transition-all ease-in-out duration-300'>
         <div className='flex items-center rounded-lg gap-8 cursor-pointer  bg-[#161B22] border-white '>
           <div className='size-[72px] flex ml-5 items-center justify-center max-md:hidden rounded-lg bg-[#58A6FF] hover:bg-[#1F6FEB] transition-all ease-in-out duration-300 '>
@@ -33,7 +34,7 @@ const CompanionSessions = async ({ params }: CompanionSessionPageProps) => {
               height={35}
             />
           </div>
-          <div className='flex flex-col gap-2 max-md:p-5 shadow-sm hover:shadow-slate-400 transition-all ease-in-out duration-300'>
+          <div className='flex flex-col gap-2 max-md:p-5 '>
             <div className='flex items-center gap-2 '>
               <p className='font-bold text-2xl text-[#C9D1D9]'>{companion.name}</p>
               <div className='bg-[#58A6FF] text-black rounded-4xl text-sm px-2 py-1 capitalize max-sm:hidden'>
@@ -50,6 +51,12 @@ const CompanionSessions = async ({ params }: CompanionSessionPageProps) => {
           </div>
         </div>
       </article>
+      <CompanionComponent
+        {...companion}
+        compannnionId={id}
+        userName={user.firstName!}
+        userImage={user.imageUrl!}
+      />
     </main>
   )
 }
