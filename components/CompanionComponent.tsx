@@ -86,7 +86,7 @@ const CompanionComponent = ({ userImage, userName, topic, name, subject, style, 
     }
 
     return (
-        <section className='flex flex-col h-[75vh]'>
+        <section className='flex flex-col h-[70vh]'>
             <section className='flex gap-8 max-sm:flex-col '>
                 <div className='border-2 shadow-sm hover:shadow-slate-400 border-[#21262D] w-2/3 max-sm:w-full flex flex-col gap-4 justify-center items-center rounded-lg transition-all ease-in-out duration-300'>
                     <div className='size-[300px] flex items-center justify-center rounded-lg max-sm:size-[100px] mt-4 bg-[#58A6FF] hover:bg-[#1F6FEB] transition-all ease-in-out duration-200'>
@@ -127,7 +127,7 @@ const CompanionComponent = ({ userImage, userName, topic, name, subject, style, 
                         />
                         <p className='font-bold text-2xl'>{userName}</p>
                     </div>
-                    <button className='border-2 border-[#21262D] shadow-sm hover:shadow-slate-400 rounded-lg flex flex-col gap-2 items-center py-8 max-sm:py-2 cursor-pointer w-full' onClick={toggleMicrophone}>
+                    <button className='border-2 border-[#21262D] shadow-sm hover:shadow-slate-400 rounded-lg flex flex-col gap-2 items-center py-8 max-sm:py-2 cursor-pointer w-full' onClick={toggleMicrophone} disabled={callStatus!==CallStatus.ACTIVE}>
                         <Image
                             src={isMuted ? '/icons/mic-off.svg' : '/icons/mic-on.svg'}
                             alt='mic'
@@ -137,14 +137,14 @@ const CompanionComponent = ({ userImage, userName, topic, name, subject, style, 
                         />
                         <p className='max-sm:hidden font-semibold text-[#C9D1D9]'>{isMuted ? "Turn off microphone" : 'Turn on microphone'}</p>
                     </button>
-                    <button className={cn('rounded-lg py-2 cursor-pointer transition-colors w-full text-[#C9D1D9]', callStatus === CallStatus.ACTIVE ? 'bg-red-700' : 'bg-[#58A6FF]', callStatus === CallStatus.CONNECTING && 'animate-pulse')} onClick={callStatus === CallStatus.ACTIVE ? handleDisconnect : handleCall}>
+                    <button className={cn('rounded-lg py-2 cursor-pointer w-full text-black font-medium text-md hover:bg-[#1F6FEB] transition-all ease-in-out duration-200', callStatus === CallStatus.ACTIVE ? 'bg-red-700' : 'bg-[#58A6FF]', callStatus === CallStatus.CONNECTING && 'animate-pulse')} onClick={callStatus === CallStatus.ACTIVE ? handleDisconnect : handleCall}>
                         {callStatus === CallStatus.ACTIVE ? 'End Session' : callStatus === CallStatus.CONNECTING ? "Connecting" : "Start Session"}
                     </button>
                 </div>
 
             </section>
-            <section className='relative flex flex-col gap-4 w-full items-center pt-10 flex-grow overflow-hidden'>
-                <div className='overflow-y-auto text-[#C9D1D9] w-full flex flex-col gap-4 max-sm:gap-2 pr-2 h-full text-2xl'>
+            <section className='relative flex flex-col gap-4 w-full items-center pt-8 flex-grow overflow-hidden'>
+                <div className='overflow-y-auto text-[#C9D1D9] w-full flex flex-col gap-4 max-sm:gap-2 pr-2 h-full text-xl'>
                     {messages.map((message, index) => {
                         if (message.role === 'assistant') {
                             return (
@@ -163,7 +163,7 @@ const CompanionComponent = ({ userImage, userName, topic, name, subject, style, 
                         }
                     })}
                 </div>
-                <div className='pointer-events-none absolute bottom-0 left-0 right-0 h-40 max-sm:h-20 bg-gradient-to-t from-background via-background/90 to-transparent z-10'/>
+                <div className='pointer-events-none absolute bottom-42 left-0 right-0 h-40 max-sm:h-20 bg-gradient-to-t from-background via-background/90 to-transparent z-10 scrollbar-black       '/>
             </section>
         </section>
 
