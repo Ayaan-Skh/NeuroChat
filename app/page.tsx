@@ -3,42 +3,30 @@ import CompanionCard from '@/components/companionCard'
 import CompanionList from '@/components/companionList'
 import CTA from '@/components/Cta'
 import {Button} from '@/components/ui/button'
-const Page = () => {
+import { getAllCompanions, getRecentSession } from '@/lib/actions/companion.action'
+const Page = async () => {
+  const companions= await getAllCompanions({limit:3});
+  const recentSessionsCompanion = await getRecentSession(10);
+
   return (
     <main className='mx-auto px-14 font-poppins flex flex-col gap-8 bg-background h-full max-w-[1400px] pt-10 max-sm:px-2'>
       <h1 className='text-3xl font-bold p-6'>Popular Companions</h1>
       <section className=' flex gap-4 justify-between items-start w-full max-lg:flex-col-reverse max-lg:items-center'>
-        <CompanionCard
-            id='1'
-            name='Companion 1'
-            topic='This is a description of Companion 1.'
-            duration='45 mins'
-            subject='Science'
+        {companions.map((companion)=>(
+          <CompanionCard
+          key={companion.id}
+          {...companion}  
+
             color='bg-[#6AF6FF]'
         />
-        <CompanionCard
-            id='2'
-            name='Companion 1'
-            topic='This is a description of Companion 1.'
-            duration='45 mins'
-            subject='Maths'
-            color='bg-[#586755]'
-        />
-        <CompanionCard
-            id='3'
-            name='Companion 1'
-            topic='This is a description of Companion 1.'
-            duration='45 mins'
-            subject='Biology'
-            color='bg-[#58A686]'
-        />
-        
+      
+        ))}
       </section>
       <section className=' flex gap-4 mt-8 justify-between items-start w-full max-lg:flex-col-reverse max-lg:items-center '>
         <CompanionList
           title='Recent Sessions'
-          companion={recentSessions}
-          classNames="w-2/3 max-lg:w-full ml-0"
+          companion={recentSessionsCompanion}
+          classNames="w-2/3 max-lg:w-full ml-0 no-scrollbar"
         />
         <CTA/>
       </section>

@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Lottie, { LottieRefCurrentProps } from 'lottie-react'
 import soundwaves from '@/assets/constants/soundwaves.json'
 import { configureAssistant } from '@/assets/lib/utils';
+import { addToSessionHistory } from '@/lib/actions/companion.action';
 
 
 enum CallStatus {
@@ -22,7 +23,7 @@ const CompanionComponent = ({ userImage, userName, topic, name, subject, style, 
     const lottieRef = useRef<LottieRefCurrentProps>(null)
     useEffect(() => {
         if (lottieRef) {
-            if (isSpeaking) {
+            if (!isSpeaking) {
                 lottieRef.current?.play()
             } else {
                 lottieRef.current?.stop()
@@ -33,30 +34,33 @@ const CompanionComponent = ({ userImage, userName, topic, name, subject, style, 
     const [messages, setMessages] = useState<SavedMessage[]>([])
     useEffect(() => {
         const onCallStart = () => setCallStatus(CallStatus.ACTIVE)
-        const onCallEnd = () => setCallStatus(CallStatus.FINISHED)
+        const onCallEnd = () => {
+            setCallStatus(CallStatus.FINISHED)
+            addToSessionHistory(companionId)
+        }
         const onMessage = (message: Message) => {
             if (message.type === 'transcript' && message.transcriptType === 'final') {
                 const newMessage = { role: message.role, content: message.transcript }
                 setMessages((prev) => [newMessage, ...prev])
             }
         }
-        const onSpeachStart = () => { }
-        const onSpeachEnd = () => { }
+        const onSpeechStart = () => setIsSpeaking(true);
+        const onSpeechEnd = () => setIsSpeaking(false);
         const onError = (error: Error) => { console.log('ERROR', error) }
 
         vapi.on('call-start', onCallStart)
         vapi.on('call-end', onCallEnd)
         vapi.on('message', onMessage)
-        vapi.on('speech-start', onSpeachStart)
-        vapi.on('speech-end', onSpeachEnd)
+        vapi.on('speech-start', onSpeechStart)
+        vapi.on('speech-end', onSpeechEnd)
         vapi.on('error', onError)
 
         return () => {
             vapi.off('call-start', onCallStart)
             vapi.off('call-end', onCallEnd)
             vapi.off('message', onMessage)
-            vapi.off('speech-start', onSpeachStart)
-            vapi.off('speech-end', onSpeachEnd)
+            vapi.off('speech-start', onSpeechStart)
+            vapi.off('speech-end', onSpeechEnd)
             vapi.off('error', onError)
         }
 
@@ -127,7 +131,7 @@ const CompanionComponent = ({ userImage, userName, topic, name, subject, style, 
                         />
                         <p className='font-bold text-2xl'>{userName}</p>
                     </div>
-                    <button className='border-2 border-[#21262D] shadow-sm hover:shadow-slate-400 rounded-lg flex flex-col gap-2 items-center py-8 max-sm:py-2 cursor-pointer w-full' onClick={toggleMicrophone} disabled={callStatus!==CallStatus.ACTIVE}>
+                    <button className='border-2 border-[#21262D] shadow-sm hover:shadow-slate-400 rounded-lg flex flex-col gap-2 items-center py-8 max-sm:py-2 cursor-pointer w-full' onClick={toggleMicrophone} disabled={callStatus !== CallStatus.ACTIVE}>
                         <Image
                             src={isMuted ? '/icons/mic-off.svg' : '/icons/mic-on.svg'}
                             alt='mic'
@@ -144,7 +148,7 @@ const CompanionComponent = ({ userImage, userName, topic, name, subject, style, 
 
             </section>
             <section className='relative flex flex-col gap-4 w-full items-center pt-8 flex-grow overflow-hidden'>
-                <div className='overflow-y-auto text-[#C9D1D9] w-full flex flex-col gap-4 max-sm:gap-2 pr-2 h-full text-xl'>
+                <div className='overflow-y-auto text-[#C9D1D9] w-full flex no-scrollbar flex-col gap-4 max-sm:gap-2 pr-2 h-full text-xl'>
                     {messages.map((message, index) => {
                         if (message.role === 'assistant') {
                             return (
@@ -163,7 +167,7 @@ const CompanionComponent = ({ userImage, userName, topic, name, subject, style, 
                         }
                     })}
                 </div>
-                <div className='pointer-events-none absolute bottom-42 left-0 right-0 h-40 max-sm:h-20 bg-gradient-to-t from-background via-background/90 to-transparent z-10 scrollbar-black       '/>
+                <div className='pointer-events-none absolute bottom-42 left-0 right-0 h-40 max-sm:h-20 bg-gradient-to-t from-background via-background/90 to-transparent z-10 scrollbar-black       ' />
             </section>
         </section>
 

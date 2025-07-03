@@ -53,7 +53,7 @@ const CompanionSessions = async ({ params }: CompanionSessionPageProps) => {
       </article>
       <CompanionComponent
         {...companion}
-        compannnionId={id}
+        companionId={id}
         userName={user.firstName!}
         userImage={user.imageUrl!}
       />
