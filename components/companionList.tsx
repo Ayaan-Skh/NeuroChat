@@ -24,7 +24,7 @@ const CompanionList = ({ title, companion, classNames }: CompanionsListProps) =>
 
     return (
         <article className={cn('rounded-4xl border border-black px-7 pt-7 pb-10 max-lg:w-full  bg-[#161B22]', classNames)} >
-            <h2 className='text-3xl text-bold text-[#C9D1D9] '>Recent sessions</h2>
+            <h2 className='text-3xl text-bold text-[#C9D1D9] '>{title}</h2>
             <Table className='text-[#8B949E]'>
                 <TableHeader>
                     <TableRow>
@@ -63,7 +63,7 @@ const CompanionList = ({ title, companion, classNames }: CompanionsListProps) =>
                                 </Link>
                             </TableCell>
                             <TableCell>
-                                <div className='subject-badge bg-[#58A6FF] hover:bg-[#1F6FEB] rounded-lg py-2 text-gray-800 text-sm text-semibold w-fit max-md:hidden'>
+                                <div className='subject-badge rounded-lg py-2 text-[#C9D1D9] text-sm text-semibold w-fit max-md:hidden'>
                                     {subject}
                                 </div>
                                 <div className='flex items-center justify-center bg-[#58A6FF] hover:bg-[#1F6FEB] md:hidden rounded-lg w-fit p-2'>
@@ -76,7 +76,7 @@ const CompanionList = ({ title, companion, classNames }: CompanionsListProps) =>
                                 </div>
                             </TableCell>
                             <TableCell>
-                                <div className='flex justify-start text-lg items-center w-full'>
+                                <div className='flex justify-end     text-lg items-center w-full'>
                                     <p>{duration}{' '}
                                         <span className='max-md:hidden'>mins</span>
                                     </p>

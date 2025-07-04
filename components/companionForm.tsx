@@ -116,7 +116,7 @@ const CompanionForm = () => {
                             <FormItem>
                                 <FormLabel>Topic</FormLabel>
                                 <FormControl>
-                                    <textarea className='text-left  border-1 border-white rounded-lg text-sm text-white placeholder:text-white ' placeholder="Ex. Derevatives & Integrals" {...field} />
+                                    <textarea className='text-left  border-1 border-white placeholder:translate-y-1/2 placeholder:translate-x-2 no-scrollbar rounded-lg text-sm text-white placeholder:text-slate-400 ' placeholder="Interview for Flipkart SDE" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

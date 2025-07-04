@@ -11,8 +11,8 @@ const CTA = () => {
             <Image
                 src='images/cta.svg'
                 alt='CTA Image'
-                width={300}
-                height={200}
+                width={200}
+                height={100}
                 className='rounded-4xl'
             >
 

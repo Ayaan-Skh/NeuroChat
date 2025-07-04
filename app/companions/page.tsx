@@ -16,7 +16,7 @@ const Companion =async ({searchParams}:SearchParams) => {
         <h1 className='text-3xl font-bold'>Companions Library</h1>
         <div className='justify-start flex gap-4'>
           <SearchInput/>
-          <SearchFilter/>
+          <SearchFilter/>       
         </div>
         
       </section>
