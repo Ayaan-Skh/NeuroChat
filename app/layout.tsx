@@ -12,6 +12,9 @@ const bricolage = Bricolage_Grotesque({
 export const metadata: Metadata = {
   title: "NeuroChat",
   description: "Real-time AI Teaching Platform",
+  icons: {
+  icon: '/favicon.png',
+}
 };
 
 export default function RootLayout({
